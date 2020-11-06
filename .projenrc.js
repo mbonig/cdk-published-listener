@@ -1,12 +1,17 @@
 const { AwsCdkTypeScriptApp } = require('projen');
 
 const project = new AwsCdkTypeScriptApp({
-  cdkVersion: "1.63.0",
-  name: "cdk-published-listener",
+  cdkVersion: '1.71.0',
+  name: 'cdk-published-listener',
 
   /* AwsCdkTypeScriptAppOptions */
   // appEntrypoint: "main.ts",                                                 /* The CDK app's entrypoint (relative to the source directory, which is "src" by default). */
-  cdkDependencies: ["@aws-cdk/aws-sns", "@aws-cdk/aws-lambda-nodejs"],
+  cdkDependencies: [
+    '@aws-cdk/aws-cloudwatch-actions',
+    '@aws-cdk/aws-lambda-nodejs',
+    '@aws-cdk/aws-sns',
+    '@aws-cdk/aws-sns-subscriptions',
+  ],
   // cdkVersionPinning: false,                                                 /* Use pinned version instead of caret version for CDK. */
   // context: undefined,                                                       /* Additional context to include in `cdk.json`. */
   // requireApproval: CdkApprovalLevel.BROADENING,                             /* To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. */
