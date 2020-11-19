@@ -28,7 +28,9 @@ const project = new AwsCdkTypeScriptApp({
   // defaultReleaseBranch: "master",                                           /* The name of the main release branch. */
   // dependabot: true,                                                         /* Include dependabot configuration. */
   // dependabotOptions: undefined,                                             /* Options for dependabot. */
-  // deps: [],                                                                 /* Runtime dependencies of this module. */
+  deps: [
+    'aws-sdk'
+  ],                                                                 /* Runtime dependencies of this module. */
   // devDeps: [],                                                              /* Build dependencies for this module. */
   // entrypoint: "lib/index.js",                                               /* Module entrypoint (`main` in `package.json`). */
   // keywords: undefined,                                                      /* Keywords to include in `package.json`. */
