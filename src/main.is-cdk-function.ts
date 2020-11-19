@@ -1,11 +1,14 @@
 import AWS from 'aws-sdk';
 
 const sns = new AWS.SNS();
-const strip = ({ name, version }) => ({ name, version });
+const strip = ({ name, version, url}) => ({ name, version, url });
 
 export const handler = async (event: any) => {
   for (const record of event.Records) {
     let parsedMessage = JSON.parse(record.Sns.Message);
+    if (!parsedMessage.dynamodb) {
+      console.warn('Weird, no dynamodb record...', record);
+    }
     const dbRecord = AWS.DynamoDB.Converter.unmarshall(parsedMessage.dynamodb.NewImage);
 
     if (/aws-cdk\/core/.test(dbRecord.name) || !/aws-cdk\//.test(dbRecord.name)) {
