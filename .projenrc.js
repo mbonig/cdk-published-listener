@@ -1,7 +1,7 @@
 const { AwsCdkTypeScriptApp } = require('projen');
 
 const project = new AwsCdkTypeScriptApp({
-  cdkVersion: '1.71.0',
+  cdkVersion: '1.74.0',
   name: 'cdk-published-listener',
 
   /* AwsCdkTypeScriptAppOptions */
