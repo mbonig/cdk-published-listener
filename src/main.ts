@@ -1,9 +1,9 @@
+import {TreatMissingData} from '@aws-cdk/aws-cloudwatch';
+import {SnsAction} from '@aws-cdk/aws-cloudwatch-actions';
 import {NodejsFunction} from '@aws-cdk/aws-lambda-nodejs';
 import {Subscription, SubscriptionProtocol, Topic} from '@aws-cdk/aws-sns';
-import {App, Construct, Stack, StackProps} from '@aws-cdk/core';
-import {TreatMissingData} from "@aws-cdk/aws-cloudwatch";
-import {SnsAction} from "@aws-cdk/aws-cloudwatch-actions";
-import {EmailSubscription} from "@aws-cdk/aws-sns-subscriptions";
+import {EmailSubscription} from '@aws-cdk/aws-sns-subscriptions';
+import {App, CfnOutput, Construct, Stack, StackProps} from '@aws-cdk/core';
 
 export class CdkPublishedListenerStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
@@ -36,6 +36,11 @@ export class CdkPublishedListenerStack extends Stack {
       topic: ccTopic,
       endpoint: handler.functionArn,
       protocol: SubscriptionProtocol.LAMBDA,
+    });
+
+    new CfnOutput(this, 'ConstructPublishedTopic', {
+      value: cdkPublishedTopic.topicArn,
+      description: 'SNS Topic Arn that gets messages from the publishing of CDK Constructs'
     });
   }
 }
